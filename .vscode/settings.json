@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "/Users/tylertivadar/opt/anaconda3/bin/python",
+    "python.linting.pylintArgs": [
+        "--errors-only",
+        "--extension-pkg-whitelist=pygame"  // The extension is "lxml" not "1xml"
+    ]
+}
