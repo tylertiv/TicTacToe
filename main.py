@@ -10,6 +10,7 @@ game = Game()
 def main():
     run = True
     clock = pygame.time.Clock()
+    temp = 0
     while run:
         clock.tick(FPS)       
 
@@ -17,7 +18,9 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass #will register a click when implemented
+                game.makeMove(0, temp)
+                temp +=1
+        run = False if temp == 4 else True
         game.draw(WIN)
         pygame.display.update()
 

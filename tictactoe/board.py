@@ -5,7 +5,7 @@ from tictactoe.move import Move
 class Board:
     def __init__(self):
         self.board = [[None for row in range(ROWS)] for col in range(COLS)]
-        self.moves = [Move('x', 0, 0), Move('o', 2,2), Move('o', 1, 1)]
+        self.moves = []
 
     def draw(self, win):
         win.fill(WHITE)
@@ -17,10 +17,11 @@ class Board:
 
         for move in self.moves:
             move.draw(win)
-
     
     def isPosEmpty(self, row, col):
         return (self.board[row][col] == 0)
 
     def update(self, move):
         self.board[move.getRow()][move.getCol()] = move.getPlayer()
+        self.moves.append(move)
+        print(self.board)

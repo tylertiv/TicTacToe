@@ -29,6 +29,6 @@ class Move:
             end2 = (BOARD_PADDING_X + (self.col + 1) * SQUARE_SIZE - MOVE_PADDING_X, BOARD_PADDING_Y + (self.row) * SQUARE_SIZE + MOVE_PADDING_X)
             pygame.draw.line(win, SYDELL, start2, end2, MOVE_DRAW_WEIGHT+5)
         else:
-            center = (BOARD_PADDING_X + self.col * SQUARE_SIZE + SQUARE_SIZE // 2, BOARD_PADDING_Y + self.col * SQUARE_SIZE + SQUARE_SIZE // 2)
+            center = (BOARD_PADDING_X + self.col * SQUARE_SIZE + SQUARE_SIZE // 2, BOARD_PADDING_Y + self.row * SQUARE_SIZE + SQUARE_SIZE // 2)
             pygame.draw.circle(win, NAVY, center, SQUARE_SIZE//2 - MOVE_PADDING_O)
             pygame.draw.circle(win, WHITE, center, SQUARE_SIZE//2 - MOVE_PADDING_O - MOVE_DRAW_WEIGHT)

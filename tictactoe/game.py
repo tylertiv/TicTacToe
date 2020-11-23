@@ -13,3 +13,4 @@ class Game:
         player = 'x' if self.turnCount % 2 == 0 else 'o'
         moveMade = Move(player, row, col)
         self.board.update(moveMade)
+        self.turnCount += 1
