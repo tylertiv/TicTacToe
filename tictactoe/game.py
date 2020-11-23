@@ -1,6 +1,6 @@
 from tictactoe.board import Board
 from tictactoe.move import Move
-from tictactoe.constants import ROWS, COLS
+from tictactoe.constants import *
 
 class Game:
     def __init__(self):

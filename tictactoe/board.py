@@ -8,7 +8,6 @@ class Board:
         self.moves = []
 
     def draw(self, win):
-        win.fill(WHITE)
         for i in range(1, 3):
             pygame.draw.line(win, BLACK, (BOARD_PADDING_X + i * SQUARE_SIZE, BOARD_PADDING_Y),
                                          (BOARD_PADDING_X + i*SQUARE_SIZE, BOARD_PADDING_Y + BOARD_HEIGHT), width=5)
@@ -26,14 +25,16 @@ class Board:
         print(self.board)
 
     def isWin(self, player, move):
-        rowWin, colWin, diagWin = True, True, True
+        rowWin, colWin, diagWin = True, True, False
         for row in self.board:
             if row[move.getCol()] != player:
                 colWin = False
         for value in self.board[move.getRow()]:
             if value != player:
                 rowWin = False
-        diagWin = False
+        
+        if (self.board[0][0] == player and self.board[1][1] == player and self.board[2][2] == player) or  (self.board[2][0] == player and self.board[1][1] == player and self.board[0][2] == player):
+            diagWin = True
 
         return rowWin or colWin or diagWin
 
