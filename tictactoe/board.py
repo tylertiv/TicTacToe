@@ -33,8 +33,29 @@ class Board:
             if value != player:
                 rowWin = False
         
-        if (self.board[0][0] == player and self.board[1][1] == player and self.board[2][2] == player) or  (self.board[2][0] == player and self.board[1][1] == player and self.board[0][2] == player):
-            diagWin = True
+        winList = []
+        if (self.board[0][0] == player and self.board[1][1] == player and self.board[2][2] == player):
+            xstart, ystart = BOARD_PADDING_X, BOARD_PADDING_Y
+            xend, yend = BOARD_PADDING_X + BOARD_WIDTH, BOARD_PADDING_Y + BOARD_HEIGHT
+            winList.append(((xstart, ystart), (xend, yend)))
+        
+        if (self.board[2][0] == player and self.board[1][1] == player and self.board[0][2] == player):
+            xstart, ystart = BOARD_PADDING_X + BOARD_WIDTH, BOARD_PADDING_Y
+            xend, yend = BOARD_PADDING_X, BOARD_PADDING_Y + BOARD_HEIGHT
+            winList.append(((xstart, ystart), (xend, yend)))
+        
+        if rowWin:
+            xstart = BOARD_PADDING_X
+            ystart = BOARD_PADDING_Y + move.getRow() * SQUARE_SIZE + SQUARE_SIZE // 2
+            xend = BOARD_PADDING_X + BOARD_WIDTH
+            yend = ystart
+            winList.append(((xstart, ystart), (xend, yend)))
 
-        return rowWin or colWin or diagWin
+        if colWin:
+            xstart = BOARD_PADDING_X + move.getCol() * SQUARE_SIZE + SQUARE_SIZE // 2
+            ystart = BOARD_PADDING_Y
+            xend = xstart
+            yend = BOARD_PADDING_Y + BOARD_HEIGHT
+            winList.append(((xstart, ystart), (xend, yend)))
+        return winList
 
