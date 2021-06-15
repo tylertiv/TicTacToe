@@ -47,6 +47,9 @@ def main():
                                 print("Winner:", game.getWinner())
                             else:
                                 print("Cat's Game")
+                        else:
+                            game.playAITurn()
+                            gameOver = game.isGameOver()
         game.draw(WIN)
         pygame.display.update()
 

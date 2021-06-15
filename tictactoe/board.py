@@ -3,10 +3,11 @@ from tictactoe.constants import *
 from tictactoe.move import Move
 
 class Board:
-    def __init__(self):
-        self.board = [[None for row in range(ROWS)] for col in range(COLS)]
-        self.moves = []
-
+    def __init__(self, boardState = None):
+        if boardState is None:
+            self.board = [[None for row in range(ROWS)] for col in range(COLS)]
+            self.moves = []
+    
     def draw(self, win):
         for i in range(1, 3):
             pygame.draw.line(win, BLACK, (BOARD_PADDING_X + i * SQUARE_SIZE, BOARD_PADDING_Y),
@@ -23,6 +24,35 @@ class Board:
         self.board[move.getRow()][move.getCol()] = move.getPlayer()
         self.moves.append(move)
         print(self.board)
+
+    def isTerminalState(self):
+        count = 0
+        for i in range(3):
+            for j in range(3):
+                if self.board[i][j] is not None:
+                    count += 1
+        if count == 9:
+            return True
+
+        count = 0
+        for i in range(3):
+            for j in range(3):
+                if self.board[i][j] == 'x':
+                    count += 1
+                if self.board[i][j] == 'o':
+                    count -= 1
+            if abs(count) == 3:
+                return True
+        for i in range(3):
+            for j in range(3):
+                if self.board[j][i] == 'x':
+                    count += 1
+                if self.board[j][i] == 'o':
+                    count -= 1
+            if abs(count) == 3:
+                return True
+
+        return False
 
     def isWin(self, player, move):
         rowWin, colWin, diagWin = True, True, False

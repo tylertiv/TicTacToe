@@ -1,7 +1,9 @@
 import pygame
+import random
 from tictactoe.board import Board
 from tictactoe.move import Move
 from tictactoe.constants import *
+from tictactoe.tree import Node, Tree
 
 class Game:
     def __init__(self):
@@ -51,3 +53,18 @@ class Game:
 
     def getWinner(self):
         return self.winner
+
+    def playAITurn(self):
+        while True:
+            row, col = random.randint(0,2), random.randint(0,2)
+            if self.board.isPosEmpty(row, col):
+                break
+        player = 'x' if self.turnCount % 2 == 0 else 'o'
+        movemade = Move(player, row, col)
+        self.board.update(movemade)
+        if self.isWinningMove(movemade):
+            self.gameOver = True
+            self.winner = player
+        if self.turnCount == 8:
+            self.gameOver = True
+        self.turnCount+=1
